@@ -1,0 +1,55 @@
+services:
+  # 1. Node.js Backend
+  - type: web
+    name: sih-backend
+    env: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sih-db
+          property: connectionString
+      - key: JWT_SECRET
+        sync: false
+      - key: ML_SERVICE_URL
+        fromService:
+          type: web
+          name: sih-ml-service
+          property: hostport
+
+  # 2. Next.js Web App
+  - type: web
+    name: sih-web-app
+    env: node
+    rootDir: web-app
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        sync: false
+
+  # 3. Python ML Service
+  - type: web
+    name: sih-ml-service
+    env: python
+    rootDir: sih2025
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn src.api.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.18
+
+databases:
+  - name: sih-db
+    plan: free
+    databaseName: giriaksha
+    user: admin
+
+version: "1"
