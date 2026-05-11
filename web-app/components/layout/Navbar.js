@@ -37,24 +37,6 @@ export default function Navbar() {
 
     return (
         <div className="flex flex-col lg:ml-64">
-            {/* Top Ministry Bar */}
-            <div className="bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 text-white py-2 px-6 shadow-md relative z-10">
-                <div className="flex items-center justify-center gap-4 max-w-7xl mx-auto">
-                    <img
-                        src="/SIH-logo.png"
-                        alt="SIH Logo"
-                        className="h-32 w-auto object-contain drop-shadow-lg"
-                    />
-                    <div className="flex flex-col items-center">
-                        <h1 className="text-xs md:text-sm font-bold tracking-wide text-center uppercase leading-tight text-gray-100">
-                            Ministry of Mines <span className="hidden md:inline mx-2">|</span> National Institute of Rock Mechanics (NIRM)
-                        </h1>
-                        <div className="text-yellow-400 font-extrabold text-xs md:text-sm mt-1 uppercase tracking-wider">
-                            SIH-2025 Team-Zenware
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             {/* Main Navbar */}
             <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6">
